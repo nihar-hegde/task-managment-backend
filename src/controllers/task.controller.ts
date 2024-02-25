@@ -4,6 +4,7 @@ import {
   createTask,
   deleteTaskById,
   getAllTasks,
+  getTaskById,
   updateTaskById,
 } from "../db/task";
 
@@ -72,5 +73,15 @@ export const updateTask = async (req: Request, res: Response) => {
     }
   } catch (error) {
     res.status(400).json({ message: error });
+  }
+};
+
+export const getIndividalTask = async (req: Request, res: Response) => {
+  try {
+    const taskId = req.params.id;
+    const taskDetails = await getTaskById(taskId);
+    res.status(400).json({ taskDetails });
+  } catch (error) {
+    return res.status(400).json({ message: error });
   }
 };
